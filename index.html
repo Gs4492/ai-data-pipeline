@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>AI Data Pipeline</h2>
+
+<input type="file" id="file">
+<button onclick="upload()">Upload CSV</button>
+
+<pre id="out"></pre>
+
+<script>
+async function upload(){
+ let f=document.getElementById("file").files[0];
+ let fd=new FormData();
+ fd.append("file",f);
+
+ let res=await fetch("/upload",{method:"POST",body:fd});
+ let data=await res.json();
+
+ document.getElementById("out").innerText=data.insights;
+}
+</script>
+
+</body>
+</html>
